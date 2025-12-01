@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="Pt-br">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="ie=Chrome">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hubly</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+    <script src="./scripts/script.js"></script>
+    <link rel="stylesheet" href="./styles/style.css">
+</head>
+<body>
+  <header class="header-navbar">
+        <!-- Logo -->
+        <div class="logo">
+            <img src="./img/logo-hubly.png" alt="Logo da Hubly">
+        </div>
+
+        <!-- Menu -->
+        <nav>
+            <ul>
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#contatos">Contatos</a></li>
+            </ul>
+        </nav>
+
+        <!-- Barra de pesquisa -->
+        <div class="search-box">
+            <input type="text" placeholder="Pesquisar...">
+            <button class="search">🔍</button>
+        </div>
+
+        <!-- Links usuário -->
+        <div class="user-links">
+            <a href="./login.html">Cadastre-se</a>
+            <a href="./login.html">Entrar</a>
+        </div>
+    </header>
+
+    <header class="header-titulo">
+        <div>
+            <p class="p-titulo">SITE DE GERENCIAMENTO ECONOMICAMENTE VIÁVEL</p>
+        </div>
+    </header>
+
+    <header class="header-section">
+        <span class="div-center">
+            <div class="card">
+                <h3>Praticidade</h3>
+                <p>Acompanhe suas vendas e estoque em tempo real de forma simples e rápida, sem complicação.</p>
+            </div>
+            <div class="card">
+                <h3>Baixo Custo</h3>
+                <p>Desenvolvido para pequenos e médios negócios, oferece tecnologia acessível e econômica.</p>
+            </div>
+            <div class="card">
+                <h3>Simples</h3>
+                <p>Interface intuitiva que qualquer pessoa pode usar, mesmo sem experiência com sistemas de gestão.</p>
+            </div>
+            <div class="card">
+                <h3>Facilidade</h3>
+                <p>Cadastre produtos, gere relatórios e organize seu negócio com poucos cliques e zero dor de cabeça.</p>
+            </div>
+        </span>
+    </header>
+
+    <br><br>
+
+    <header class="header-info">
+        <section class="features">
+            <a class="a-dash" href="./dashboard.html">
+                <div class="feature-card">
+                    <div class="icon">📊</div>
+                    <h3>Análise de Vendas</h3>
+                    <p>Visualize gráficos interativos e entenda as tendências de faturamento para tomar decisões mais inteligentes.</p>
+                </div>
+            </a>
+            <div class="feature-card">
+                <div class="icon">📦</div>
+                <h3>Controle de Estoque</h3>
+                <p>Monitore os níveis de estoque em tempo real, receba alertas e evite a falta de produtos.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">📄</div>
+                <h3>Relatórios Simplificados</h3>
+                <p>Gere relatórios completos de performance com apenas um clique e otimize sua operação.</p>
+            </div>
+        </section>
+    </header>
+
+    <section class="sobre" id="sobre">
+        <div class="sobre-container">
+            <h2>Sobre Nós</h2>
+            <p>
+            A <b>Hubly</b> é uma plataforma web focada em <b>impulsionar o comércio local</b>, 
+            oferecendo ferramentas digitais simples e acessíveis. Nosso objetivo é <b>cadastrar comércios locais</b>, 
+            <b>impulsionar vendas</b>, <b>digitalizar negócios</b> e <b>facilitar a vida dos lojistas</b> com o apoio da <b>ACE</b>.  
+            <br><br>
+            Em parceria com a <b>Tray</b>, mostramos em tempo real a quantidade de vendas e outros indicadores 
+            essenciais para o crescimento sustentável do seu negócio.
+            </p>
+            <div class="sobre-cards">
+                <div class="sobre-card">
+                    <span class="icon">🚀</span>
+                    <h3>Missão</h3>
+                    <p>Impulsionar negócios locais através de soluções digitais econômicas e funcionais.</p>
+                </div>
+                <div class="sobre-card">
+                    <span class="icon">🌎</span>
+                    <h3>Visão</h3>
+                    <p>Ser referência em sistemas de gestão acessíveis e apoio ao comércio local.</p>
+                </div>
+                <div class="sobre-card">
+                    <span class="icon">💡</span>
+                    <h3>Valores</h3>
+                    <p>Inovação, simplicidade, acessibilidade e foco no comércio da comunidade.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contatos" id="contatos">
+        <div class="contatos-container">
+            <h2>Entre em Contato</h2>
+            <p>Fale com a gente para tirar dúvidas, sugerir melhorias ou parcerias!</p>
+            <div class="contatos-info">
+                <div class="info-card">
+                    📧 <b>Email:</b> ACE.casabranca@gmail.com
+                </div>
+                <div class="info-card">
+                    📞 <b>Telefone:</b> (19) 99719-4694
+                </div>
+                <div class="info-card">
+                    📍 <b>Endereço:</b> Rua Luís Gama, 432 – Jardim Paulista / SP
+                </div>
+            </div>
+            <form class="contato-form">
+                <input type="text" placeholder="Seu nome" required>
+                <input type="email" placeholder="Seu email" required>
+                <textarea placeholder="Escreva sua mensagem..." rows="4" required></textarea>
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+    </section>
+
+
+    <footer class="footer">
+        <p>&copy; Todos os direitos reservados para <b>HUBLY 2025</b>.</p>
+    </footer>
+</body>
+</html>

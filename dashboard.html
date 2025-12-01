@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hubly - dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="./styles/dashboard.css">
+</head>
+
+<body>
+
+    <header class="header-navbar">
+        <!-- Logo -->
+        <div class="logo">
+            <img src="./img/logo-hubly.png" alt="Logo da Hubly">
+        </div>
+
+        <!-- Menu -->
+        <nav>
+            <ul>
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#contatos">Contatos</a></li>
+            </ul>
+        </nav>
+
+        <!-- Barra de pesquisa -->
+        <div class="search-box">
+            <input type="text" placeholder="Pesquisar...">
+            <button class="search">🔍</button>
+        </div>
+
+        <!-- Links usuário -->
+        <div class="user-links">
+            <a href="./login.html">Cadastre-se</a>
+            <a href="./login.html">Entrar</a>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <div class="dashboard">
+            <section>
+                <h2>Visão Geral de Vendas</h2>
+                <div class="kpi-container">
+                    <div class="kpi-card">
+                        <p class="value">R$ 15.230,50</p>
+                        <p class="label">Faturamento (Mês)</p>
+                    </div>
+                    <div class="kpi-card">
+                        <p class="value">125</p>
+                        <p class="label">Pedidos Realizados (Mês)</p>
+                    </div>
+                    <div class="kpi-card">
+                        <p class="value">R$ 121,84</p>
+                        <p class="label">Ticket Médio</p>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="salesChart"></canvas>
+                </div>
+            </section>
+
+            <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+
+            <section>
+                <h2>Status do Estoque</h2>
+                <div class="kpi-container">
+                    <div class="kpi-card">
+                        <p class="value">R$ 85.400,00</p>
+                        <p class="label">Valor Total em Estoque</p>
+                    </div>
+                    <div class="kpi-card" style="border-left: 4px solid #ffc107;">
+                        <p class="value">8</p>
+                        <p class="label">Produtos com Estoque Baixo</p>
+                    </div>
+                </div>
+                <h3>Top 5 Produtos Mais Vendidos</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Unidades Vendidas</th>
+                            <th>Estoque Atual</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Notebook Pro X1</td>
+                            <td>32</td>
+                            <td>15</td>
+                        </tr>
+                        <tr>
+                            <td>Mouse Sem Fio Ergo</td>
+                            <td>78</td>
+                            <td>45</td>
+                        </tr>
+                        <tr>
+                            <td>Teclado Mecânico Gamer</td>
+                            <td>25</td>
+                            <td>5 <span style="color: #dc3545; font-weight: bold;">(Baixo!)</span></td>
+                        </tr>
+                        <tr>
+                            <td>Monitor 4K UltraWide</td>
+                            <td>18</td>
+                            <td>22</td>
+                        </tr>
+                        <tr>
+                            <td>Webcam HD 1080p</td>
+                            <td>55</td>
+                            <td>8 <span style="color: #dc3545; font-weight: bold;">(Baixo!)</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          // se não existir o elemento do gráfico, aborta (não estamos na dashboard)
+          if (!document.getElementById('salesChart')) return;
+        
+          fetchDashboardData();
+        });
+
+        function fetchDashboardData() {
+          fetch('http://192.168.35.45:3001/root/hubly')
+            .then(response => {
+              if (!response.ok) throw new Error('HTTP ' + response.status);
+              return response.json();
+            })
+            .then(data => {
+              const fatur = document.querySelector('#kpi-faturamento .value');
+              const pedidos = document.querySelector('#kpi-pedidos .value');
+              const estoque = document.querySelector('#kpi-estoque-baixo .value');
+            
+              if (fatur) fatur.textContent = formatCurrency(Number(data.faturamentoMes) || 0);
+              if (pedidos) pedidos.textContent = data.pedidosMes ?? 0;
+              if (estoque) estoque.textContent = data.estoqueBaixo ?? 0;
+            })
+            .catch(error => {
+              console.error('Erro ao buscar dados do dashboard:', error);
+              // NÃO use alert() — substitua por mensagem não intrusiva
+              showToast('Dados do painel indisponíveis no momento.');
+            });
+        }
+
+        const ctx = document.getElementById('salesChart').getContext('2d');
+        const salesChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4'],
+                datasets: [{
+                    label: 'Faturamento Semanal',
+                    data: [3500, 5200, 4100, 6430],
+                    backgroundColor: 'rgba(99, 164, 255, 0.2)',
+                    borderColor: 'rgba(99, 164, 255, 1)',
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+
+        function showToast(msg) {
+          const el = document.createElement('div');
+          el.className = 'app-toast';
+          el.textContent = msg;
+          document.body.appendChild(el);
+          setTimeout(() => el.remove(), 5000);
+        }
+    </script>
+
+</body>
+
+</html>
